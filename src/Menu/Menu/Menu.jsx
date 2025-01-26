@@ -9,9 +9,16 @@ const Menu = () => {
       <Helmet>
         <title>BISTRO BOSS | MENU</title>
       </Helmet>
-      <h1>Hello World</h1>
+        <COver img={menuImg} title={"OUR MENU"} subTitle={"Would You Like TO Try A Dish?"}></COver>
+      <div className='max-w-screen-xl mx-auto'>
+      <PopularMenu buttonText={"ORDER YOUR FAVORITE FOOD"}></PopularMenu>
       <COver img={menuImg} title={"OUR MENU"} subTitle={"Would You Like TO Try A Dish?"}></COver>
       <PopularMenu buttonText={"ORDER YOUR FAVORITE FOOD"}></PopularMenu>
+      <COver img={menuImg} title={"OUR MENU"} subTitle={"Would You Like TO Try A Dish?"}></COver>
+      <PopularMenu buttonText={"ORDER YOUR FAVORITE FOOD"}></PopularMenu>
+      <COver img={menuImg} title={"OUR MENU"} subTitle={"Would You Like TO Try A Dish?"}></COver>
+      <PopularMenu buttonText={"ORDER YOUR FAVORITE FOOD"}></PopularMenu>
+        </div>
 
             
         </div>
