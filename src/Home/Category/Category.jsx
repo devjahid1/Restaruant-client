@@ -57,7 +57,7 @@ const Category = () => {
 
       <section
     className="h-[500px] bg-cover bg-center flex justify-center items-center"
-    style={{ backgroundImage: `url(${bgImg})` }}
+   style={{ backgroundImage: `url(${bgImg})` }} 
   >
     {/*add content here */}
         <div className='text-center w-3/4 bg-white p-10'>

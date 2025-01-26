@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SectionTitle from "../../components/SectionTitle";
 import MenuItem from "../../Shared/MenuItem/MenuItem";
 
-const PopularMenu = () => {
+const PopularMenu = ({buttonText}) => {
     const [menu, setMenu] = useState([]);
 
     //LoadData
@@ -28,13 +28,10 @@ const PopularMenu = () => {
             </div>
              {/* Center the button */}
   <div className="flex justify-center mt-6">
-    <button className="btn btn-outline uppercase border-0 border-b-2">
-      VIEW ALL MENU
+    <button className="btn btn-outline uppercase border-0 border-b-2">{buttonText || "VIEW ALL MENU"}
     </button>
   </div>
-            <section>
-                <h3 className="text-4xl text-center py-10 bg-black text-white mt-12 mb-7">Call Us: +88 0192345678910</h3>
-            </section>
+
         </section>
     );
 };
