@@ -1,27 +1,43 @@
 import { Helmet} from 'react-helmet-async';
 import COver from '../../Shared/Cover/COver';
-import menuImg from '../../assets/menu/banner3.jpg'
-import PopularMenu from '../../Home/PopularMenu/PopularMenu';
+import menuImg from '../../assets/menu/Rectangle 1.png'
+import dessertImg from '../../assets/menu/dessert-bg.png'
+import saladImg from '../../assets/menu/salad-bg.jpg'
+import pizzaImg from '../../assets/menu/pizza-bg.jpg'
+import soupImg from '../../assets/menu/soup-bg.jpg'
+import useMenu from '../../Hooks/useMenu';
+import SectionTitle from '../../../src/components/SectionTitle';
+import MenuCategory from './MenuCategory/MenuCategory';
 const Menu = () => {
+  const [menu] = useMenu();
+  const dessert = menu.filter(items => items.category === 'dessert')
+  const pizza = menu.filter(items => items.category === 'pizza')
+  const salad = menu.filter(items => items.category === 'salad')
+  const soup = menu.filter(items => items.category === 'soup')
+  const offered = menu.filter(items => items.category === 'offered')
     return (
         <div>
 
       <Helmet>
         <title>BISTRO BOSS | MENU</title>
       </Helmet>
+      {/* Main cover */}
         <COver img={menuImg} title={"OUR MENU"} subTitle={"Would You Like TO Try A Dish?"}></COver>
-      <div className='max-w-screen-xl mx-auto'>
-      <PopularMenu buttonText={"ORDER YOUR FAVORITE FOOD"}></PopularMenu>
-      <COver img={menuImg} title={"OUR MENU"} subTitle={"Would You Like TO Try A Dish?"}></COver>
-      <PopularMenu buttonText={"ORDER YOUR FAVORITE FOOD"}></PopularMenu>
-      <COver img={menuImg} title={"OUR MENU"} subTitle={"Would You Like TO Try A Dish?"}></COver>
-      <PopularMenu buttonText={"ORDER YOUR FAVORITE FOOD"}></PopularMenu>
-      <COver img={menuImg} title={"OUR MENU"} subTitle={"Would You Like TO Try A Dish?"}></COver>
-      <PopularMenu buttonText={"ORDER YOUR FAVORITE FOOD"}></PopularMenu>
+        <SectionTitle subHeading={"Don't Miss"} heading={"Todays Offer"}/>
+        <div className='max-w-screen-xl m-auto'>
+          {/* offered */}
+        <MenuCategory items={offered}></MenuCategory>
+        {/* Desserts */}
+        <MenuCategory items={dessert} title="Desserts" img={dessertImg}></MenuCategory>
+        {/* Pizza */}
+        <MenuCategory items={pizza} title="PIZZA" img={pizzaImg}></MenuCategory>
+        {/* Salads */}
+        <MenuCategory items={salad} title="SALADS" img={saladImg}></MenuCategory>
+        {/* Soup */}
+        <MenuCategory items={soup} title="SOUPs" img={soupImg}></MenuCategory>
+        </div>
         </div>
 
-            
-        </div>
     );
 };
 
