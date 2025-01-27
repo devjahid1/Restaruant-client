@@ -4,6 +4,7 @@ import {
 import Main from "../Layout/Main";
 import Home from "../Home/Home";
 import Menu from "../Menu/Menu/Menu";
+import Order from "../Order/Order/Order";
 
 
 
@@ -20,6 +21,10 @@ import Menu from "../Menu/Menu/Menu";
         {
           path:'/menu',
           element:<Menu/>
+        },
+        {
+          path:'/shop',
+          element:<Order/>
         }
       ]
     },
