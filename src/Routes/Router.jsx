@@ -23,8 +23,8 @@ import Order from "../Order/Order/Order";
           element:<Menu/>
         },
         {
-          path:'/shop',
-          element:<Order/>
+          path:'/shop/:category',
+          element:<Order/>,
         }
       ]
     },
