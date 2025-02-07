@@ -1,12 +1,17 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { useContext, useEffect, useState } from 'react';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../Providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
-    const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
-    const {signIn, } = useContext(AuthContext)
+    const {signIn, } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from.pathname || '/';
 
     useEffect(()=>{
         loadCaptchaEnginge(6); 
@@ -21,17 +26,35 @@ const Login = () => {
         signIn(email, password)
         .then(result =>{
           const user = result.user;
+          Swal.fire({
+            title: "Login Successfully",
+            showClass: {
+              popup: `
+                animate__animated
+                animate__fadeInUp
+                animate__faster
+              `
+            },
+            hideClass: {
+              popup: `
+                animate__animated
+                animate__fadeOutDown
+                animate__faster
+              `
+            }
+          });
+          navigate(from, {replace:true});
           console.log(user);
-          
         })
+
         .catch(error=>{
           console.error(error)
         })
         
     }
 
-    const handleValidateCaptcha = () =>{
-        const value = captchaRef.current.value;
+    const handleValidateCaptcha = (e) =>{
+        const value = e.target.value;
         if(validateCaptcha(value)){
             setDisabled(false);
         }
@@ -74,17 +97,19 @@ const Login = () => {
             <label className='label'>
                 <LoadCanvasTemplate/>
             </label>
-          <input ref={captchaRef} type="text" name="captcha" placeholder="Type Captcha" className="input input-bordered" required />
-          <button onClick={handleValidateCaptcha} className='btn btn-outline btn-xs'>Validate</button>
+          <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Type Captcha" className="input input-bordered" required />
         </div>
 
         <div className="form-control mt-6">
-          <input disabled={disabled}  className="btn btn-primary mt-2" type="submit" value="Login" />
+          {/* apply recaptcha disabled */}
+          <input disabled={false}  className="btn btn-primary mt-2" type="submit" value="Login" />
         </div>
       </form>
-      <p><small>New Here? <Link to="/signup">Create an account</Link></small></p>
+      <p className="text-center mb-5 text-xl"><small>New Here? <Link className="text-blue-700 font-bold" to="/signup">Create an account</Link></small></p>
+      <SocialLogin/>
     </div>
   </div>
+
 </div>
     );
 };

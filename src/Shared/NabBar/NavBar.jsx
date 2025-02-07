@@ -1,14 +1,42 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { FaCartShopping } from "react-icons/fa6";
+import useCart from "../../Hooks/useCart";
 
 const NavBar = () => {
 
+  const [cart] = useCart();
+
+  const {user, logOut} = useContext(AuthContext);
+  const handleLogOut = () =>{
+    logOut()
+    .then(()=>{})
+    .catch(error=>console.log(error)
+    )
+  }
     const navOptions = <>
     <li><Link to='/'>HOME</Link></li>
     <li><Link to='contact'>CONTACT US</Link></li>
     <li><Link to='/dashboard'>DASHBOARD</Link></li>
     <li><Link to='/menu'>OUR MENU</Link></li>
     <li><Link to='/shop/salad'>OUR SHOP</Link></li>
-    <li><Link to='/login'>Login</Link></li>
+    <li>
+      <Link to='/dashboard/cart'>
+      <button className="btn">
+      <FaCartShopping />
+        <div className="badge badge-secondary">+{cart.length}</div>
+      </button>
+      </Link>
+    </li>
+    {
+      user ? <>
+      {/* <span>{user?.displayName}</span> */}
+        <button onClick={handleLogOut} className="btn btn-ghost">Log Out</button>
+      </> : <>
+        <li><Link to='/login'>Login</Link></li>
+      </>
+    }
     </>
 
 
