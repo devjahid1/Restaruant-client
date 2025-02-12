@@ -40,9 +40,8 @@ const AuthProvider = ({children}) => {
     }
 
 
-
-   const unsubscribe =  useEffect(()=>{
-        onAuthStateChanged(auth, currentUser=>{
+    useEffect(()=>{
+   const unsubscribe =  onAuthStateChanged(auth, currentUser=>{
             setUser(currentUser);
             if(currentUser){
                 //assign get token
@@ -50,7 +49,7 @@ const AuthProvider = ({children}) => {
                 axiosPublic.post('/jwt', userInfo)
                 .then(res=>{
                     if(res.data.token){
-                        localStorage.setItem('Access Token', res.data.token)
+                        localStorage.setItem('access-token', res.data.token)
                     }
                 })
 

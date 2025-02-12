@@ -8,11 +8,7 @@ const AllUsers = () => {
     const {data:users = [], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async () =>{
-            const res = await axiosSecure.get('/users',{
-              headers:{
-                Authorization: `Bearer ${localStorage.getItem('access-token')}`
-              }
-            });
+            const res = await axiosSecure.get('/users');
            
             return res.data;
         }
@@ -25,7 +21,7 @@ const AllUsers = () => {
                 refetch();
                 Swal.fire({
                     position: "top-end",
-                    icon: `${user.name} is an admin now`,
+                    icon: `Success`,
                     title: `${user.name} is an admin now`,
                     showConfirmButton: false,
                     timer: 1500
